@@ -16,7 +16,11 @@ def calculate_credit_payment(
     :return payment: calculated monthly payment
     """
     credit_sum: int = int(price) - int(deposit)
-    monthly_rate: float = float(rate_min) / 12
+    rate_min = float(rate_min)
+    monthly_rate: float = float(rate_min) / 100 / 12
     term_in_months: int = int(term) * 12
-    payment: float = credit_sum * monthly_rate / (1 - (1 / (1 + monthly_rate)) * term_in_months)
-    return int(-payment)
+
+    payment: float = credit_sum * \
+        (monthly_rate * (1 + monthly_rate)**term_in_months) \
+        / ((1 + monthly_rate)**term_in_months - 1)
+    return int(payment)
