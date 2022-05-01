@@ -5,11 +5,11 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
 
-from .routers import router
+# from .routers import router
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include(router.urls)),
+    path("api/", include("credit_offers.routers")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
 ]
